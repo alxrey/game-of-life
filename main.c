@@ -218,7 +218,9 @@ void lifeGameUpdate(const bool cellsA_[][WIDTH],
         {
             for (frameLine = line - 1; frameLine <= line + 1; frameLine++)
             {
-                for (frameColumn = column - 1; frameColumn <= column + 1; frameColumn++)
+                for (frameColumn = column - 1;
+                     frameColumn <= column + 1;
+                     frameColumn++)
                 {
                     if ((isCellAlive(cellsA_, frameLine, frameColumn) &&
                          (frameLine != line || frameColumn != column)))
@@ -230,17 +232,21 @@ void lifeGameUpdate(const bool cellsA_[][WIDTH],
 
             if (sumCellAliveFrame == 3)
             {
-                // if 3 adjacent cells are alive, it will live
+                // if 3 adjacent cells are alive, it lives
                 setCell(cellsB_, line, column, true, cellAliveCpt_);
             }
             else if (sumCellAliveFrame == 2)
             {
-                // if 2 adjacent cells are alive, it will keep its previous state
-                setCell(cellsB_, line, column, isCellAlive(cellsA_, line, column), cellAliveCpt_);
+                // if 2 adjacent cells are alive, it keeps its previous state
+                setCell(cellsB_,
+                        line,
+                        column,
+                        isCellAlive(cellsA_, line, column),
+                        cellAliveCpt_);
             }
             else
             {
-                // else it will die
+                // else it dies
                 setCell(cellsB_, line, column, false, cellAliveCpt_);
             }
 
@@ -292,28 +298,32 @@ void addPattern(bool cell_[][WIDTH],
         {
             for (indexB = -1; indexB <= 4; indexB++)
             {
-                setCell(cell_, line_ + indexA, column_ + indexB, true, cellAliveCpt_);
+                setCell(cell_, line_ + indexA, column_ + indexB, true, 
+                        cellAliveCpt_);
             }
         }
         for (indexA = -4; indexA <= 1; indexA++)
         {
             for (indexB = -4; indexB <= -3; indexB++)
             {
-                setCell(cell_, line_ + indexA, column_ + indexB, true, cellAliveCpt_);
+                setCell(cell_, line_ + indexA, column_ + indexB, true, 
+                        cellAliveCpt_);
             }
         }
         for (indexA = -1; indexA <= 4; indexA++)
         {
             for (indexB = 3; indexB <= 4; indexB++)
             {
-                setCell(cell_, line_ + indexA, column_ + indexB, true, cellAliveCpt_);
+                setCell(cell_, line_ + indexA, column_ + indexB, true, 
+                        cellAliveCpt_);
             }
         }
         for (indexA = 3; indexA <= 4; indexA++)
         {
             for (indexB = -4; indexB <= 1; indexB++)
             {
-                setCell(cell_, line_ + indexA, column_ + indexB, true, cellAliveCpt_);
+                setCell(cell_, line_ + indexA, column_ + indexB, true, 
+                        cellAliveCpt_);
             }
         }
         break;
@@ -367,7 +377,11 @@ void copie(const bool tableauOriginal_[][WIDTH], bool tableauCopie_[][WIDTH])
     {
         for (column = 1; column < (HEIGHT - 1); column++)
         {
-            setCell(tableauCopie_, line, column, isCellAlive(tableauOriginal_, line, column), &cellAliveCpt);
+            setCell(tableauCopie_, 
+                    line, 
+                    column, 
+                    isCellAlive(tableauOriginal_, line, column), 
+                    &cellAliveCpt);
         }
     }
 
@@ -404,11 +418,13 @@ void prepareCells(bool cells_[][WIDTH],
         break;
 
     case 5: // Structure oscillante : galaxie de Kok
-        addPattern(cells_, lineCenter, columnCenter, GALAXIEDEKOK, cellAliveCpt_);
+        addPattern(cells_, lineCenter, columnCenter, GALAXIEDEKOK, 
+                   cellAliveCpt_);
         break;
 
     case 6: // Structure oscillante : pentadecathlon
-        addPattern(cells_, lineCenter, columnCenter, PENTADECATHLON, cellAliveCpt_);
+        addPattern(cells_, lineCenter, columnCenter, PENTADECATHLON, 
+                   cellAliveCpt_);
         break;
 
     case 7: // Vaisseau de type planeur
@@ -421,7 +437,8 @@ void prepareCells(bool cells_[][WIDTH],
         {
             line = (rand() % (HEIGHT - 1));
             column = (rand() % (WIDTH - 1));
-            if (randomNo < (RAND_MAX / 2) && isCellAlive(cells_, line, column) == false)
+            if (randomNo < (RAND_MAX / 2) && 
+                isCellAlive(cells_, line, column) == false)
             {
                 setCell(cells_, line, column, true, cellAliveCpt_);
                 cpt++;
